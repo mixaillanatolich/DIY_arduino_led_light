@@ -22,9 +22,9 @@
 
 // ************************** НАСТРОЙКИ ***********************
 #define CURRENT_LIMIT 400  // лимит по току в миллиамперах, автоматически управляет яркостью (пожалей свой блок питания!) 0 - выключить лимит
-#define AUTOPLAY_TIME 30    // время между сменой режимов в секундах
+#define AUTOPLAY_TIME 120    // время между сменой режимов в секундах
 
-#define NUM_LEDS 8         // количсетво светодиодов в одном отрезке ленты
+#define NUM_LEDS 7         // количсетво светодиодов в одном отрезке ленты
 #define NUM_STRIPS 1        // количество отрезков ленты (в параллели)
 #define LED_PIN 6           // пин ленты
 #define BTN_PIN 2           // пин кнопки/сенсора
@@ -53,7 +53,7 @@ byte thisMode;
 
 bool gReverseDirection = false;
 boolean loadingFlag = true;
-boolean autoplay = false;
+boolean autoplay = true;
 boolean powerDirection = true;
 boolean powerActive = false;
 boolean powerState = true;
@@ -131,6 +131,10 @@ void loop() {
         break;
     }
     FastLED.show();
+  }
+
+  if (autoplayTimer.isReady() && autoplay) {    // таймер смены режима
+    nextMode();
   }
 }
 
