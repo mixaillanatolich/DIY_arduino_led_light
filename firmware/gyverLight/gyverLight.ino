@@ -24,7 +24,7 @@
 #define CURRENT_LIMIT 2000  // лимит по току в миллиамперах, автоматически управляет яркостью (пожалей свой блок питания!) 0 - выключить лимит
 #define AUTOPLAY_TIME 120    // время между сменой режимов в секундах
 
-#define NUM_LEDS 14         // количсетво светодиодов в одном отрезке ленты
+#define NUM_LEDS 13         // количсетво светодиодов в одном отрезке ленты
 #define NUM_STRIPS 4        // количество отрезков ленты (в параллели)
 #define LED_PIN 6           // пин ленты
 #define BTN_PIN 2           // пин кнопки/сенсора
@@ -178,6 +178,8 @@ void loop() {
 
   if (autoplayTimer.isReady() && autoplay) {    // таймер смены режима
     nextMode();
+    // skip white light
+    if (thisMode >= MODES_AMOUNT-1) thisMode = 0;
   }
 
   brightnessTick();

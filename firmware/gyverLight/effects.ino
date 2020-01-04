@@ -8,7 +8,7 @@ void lighter() {
   FastLED.clear();
   if (direction) {
     position++;
-    if (position > NUM_LEDS - 1) {
+    if (position > NUM_LEDS - 2) {
       direction = false;
     }
   } else {
